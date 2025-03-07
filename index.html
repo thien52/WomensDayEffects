@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc mừng 8/3 Siêu Đặc Sắc!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset (optional, but recommended) */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Confetti Container */
+        #confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Cho phép click xuyên qua */
+        }
+
+        /* Header */
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+            animation: headerAnimation 2s ease-in-out;
+        }
+
+        @keyframes headerAnimation {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Button */
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(45deg, #ff1c70, #ff4081);
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0px 8px 30px rgba(255, 64, 129, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 10px 35px rgba(255, 64, 129, 0.9);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Modal (Hidden by default) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.5);
+            animation: modalAnimation 0.5s ease-in-out;
+        }
+
+        @keyframes modalAnimation {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .modal h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #e91e63;
+        }
+
+        .modal p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .close-btn {
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #e91e63;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #d81b60;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .btn { font-size: 1.4rem; padding: 15px 40px; }
+            .modal-content { padding: 30px; }
+            .modal h2 { font-size: 2.5rem; }
+            .modal p { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="confetti-container"></div>
+
+    <h1>💖 Chúc mừng ngày 8/3! 💖</h1>
+    <button class="btn" onclick="showEffects()">✨ Nhận Ngàn Lời Chúc! ✨</button>
+
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <h2>💖 Chúc Mừng Ngày Quốc Tế Phụ Nữ! 💖</h2>
+            <p>
+                Chúc mừng ngày 8.3 người đẹp
+            </p>
+            <button class="close-btn" onclick="closeModal()">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show the modal
+        function showModal() {
+            document.getElementById("myModal").style.display = "flex";
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+            const numberOfConfetti = 200;
+
+            for (let i = 0; i < numberOfConfetti; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.position = 'absolute';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -Math.random() * 20 + '%'; // Bắt đầu từ trên
+                confetti.style.opacity = Math.random();
+
+                confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s linear infinite`; // Random duration
+
+                container.appendChild(confetti);
+            }
+        }
+
+        // Confetti Animation
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `
+            @keyframes confettiFall {
+                to {
+                    top: 100%;
+                    transform: rotate(${Math.random() * 360}deg); /* Random rotation */
+                }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // Main Function to Trigger Effects
+        function showEffects() {
+            // Disable the button
+            const btn = document.querySelector('.btn');
+            btn.disabled = true;
+            btn.innerText = "Đang gửi yêu thương";
+
+            // Create confetti effect
+            createConfetti();
+
+            // Show the modal after a delay
+            setTimeout(() => {
+                showModal();
+                btn.disabled = false;
+                btn.innerText = "✨ Nhận Ngàn Lời Chúc! ✨";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
